@@ -21,7 +21,7 @@
             </div>
 
             <div class="product-price">
-                $${(product.price/100).toFixed(2)}
+                $${(product.priceCents/100).toFixed(2)}
             </div>
 
             <div class="product-quantity-container">
@@ -47,25 +47,41 @@
             </div>
 
             <button class="add-to-cart-button button-primary add-to-card-button"
-            data-product-name = '${product.name}'>
+            data-product-id= "${product.id}">
                 Add to Cart
             </button>
             </div> `;
 
         
     });
-    console.log(productsHTML);
+    
     
     document.querySelector('.js-products-grid').innerHTML = productsHTML;
 
     document.querySelectorAll('.add-to-card-button').forEach((button)=>{
         button.addEventListener('click',() => {
-            const productname = button.dataset.productname;
+            const productid= button.dataset.productid;
+
+            let matchingitem ;
+
+           cart.forEach((item) =>{
+            if(productid === item.productid){
+                matchingitem = item;
+            }
+
+           });
+           
+           if(matchingitem){
+            matchingitem.quantity += 1;
+           } else {
+
+           
             cart.push({
-                productname : productname,
+                productid: productid,
                 quantity:1
             });
+        };
             console.log(cart);
-        })
+        });
 
     });
