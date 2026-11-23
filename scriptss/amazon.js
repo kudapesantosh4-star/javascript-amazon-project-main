@@ -81,7 +81,13 @@
                 quantity:1
             });
         };
-            console.log(cart);
+        let cardquantity = 0;
+           
+        cart.forEach((items) => {
+            cardquantity += items.quantity;
+        });
+        document.querySelector('.js-cart-quantity').innerHTML = cardquantity;
+        
         });
 
     });
